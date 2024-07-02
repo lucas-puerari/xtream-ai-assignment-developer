@@ -1,3 +1,6 @@
+setup:
+	pre-commit install
+
 lint:
 	pylint src
 

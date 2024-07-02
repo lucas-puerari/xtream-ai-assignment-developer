@@ -1,0 +1,12 @@
+repos: []
+
+hooks:
+  - id: pylint
+    name: pylint
+    entry: pylint
+    args: ['src']
+
+  - id: pytest
+    name: pytest
+    entry: pytest
+    args: ['src']
