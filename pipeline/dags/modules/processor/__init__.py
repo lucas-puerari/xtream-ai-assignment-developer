@@ -11,6 +11,9 @@ TRAIN_TEST_SPLIT = 0.2
 def pre_data_preparation(csv_string):
     df_diamonds = pd.read_csv(io.StringIO(csv_string))
 
+    # the analysis didn't reveal any missing data
+    # however, it's recommended to still consider removing incomplete data
+
     df_diamonds = df_diamonds[
         (df_diamonds.x * df_diamonds.y * df_diamonds.z != 0)
         & (df_diamonds.price > 0)
@@ -27,6 +30,30 @@ def linear_data_preparation(diamonds):
     df_diamonds = pd.DataFrame(diamonds[1:], columns=diamonds[0])
 
     df_diamonds = pd.get_dummies(df_diamonds, columns=['cut', 'color', 'clarity'], drop_first=True)
+
+    return [df_diamonds.columns.tolist()] + df_diamonds.values.tolist()
+
+
+def xgboost_data_preparation(diamonds):
+    df_diamonds = pd.DataFrame(diamonds[1:], columns=diamonds[0])
+
+    df_diamonds['cut'] = pd.Categorical(
+        df_diamonds['cut'],
+        categories=['Fair', 'Good', 'Very Good', 'Ideal', 'Premium'],
+        ordered=True
+    ).codes
+
+    df_diamonds['color'] = pd.Categorical(
+        df_diamonds['color'],
+        categories=['D', 'E', 'F', 'G', 'H', 'I', 'J'],
+        ordered=True
+    ).codes
+
+    df_diamonds['clarity'] = pd.Categorical(
+        df_diamonds['clarity'],
+        categories=['IF', 'VVS1', 'VVS2', 'VS1', 'VS2', 'SI1', 'SI2', 'I1'],
+        ordered=True
+    ).codes
 
     return [df_diamonds.columns.tolist()] + df_diamonds.values.tolist()
 
