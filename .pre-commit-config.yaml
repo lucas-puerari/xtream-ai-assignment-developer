@@ -4,9 +4,9 @@ hooks:
   - id: pylint
     name: pylint
     entry: pylint
-    args: ['src']
+    args: ['pipeline']
 
   - id: pytest
     name: pytest
     entry: pytest
-    args: ['src']
+    args: ['pipeline']
