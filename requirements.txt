@@ -117,6 +117,7 @@ opentelemetry-exporter-otlp-proto-http==1.25.0
 opentelemetry-proto==1.25.0
 opentelemetry-sdk==1.25.0
 opentelemetry-semantic-conventions==0.46b0
+optuna==3.6.1
 ordered-set==4.1.0
 packaging==24.1
 pandas==2.2.2
@@ -170,6 +171,7 @@ threadpoolctl==3.5.0
 time-machine==2.14.2
 tomli==2.0.1
 tomlkit==0.12.5
+tqdm==4.66.4
 typing_extensions==4.12.2
 tzdata==2024.1
 uc-micro-py==1.0.3
@@ -181,5 +183,6 @@ Werkzeug==2.2.3
 wirerope==0.4.7
 wrapt==1.16.0
 WTForms==3.1.2
+xgboost==2.1.0
 yarl==1.9.4
 zipp==3.19.2
