@@ -1,0 +1,12 @@
+repos: []
+
+hooks:
+  - id: pylint
+    name: pylint
+    entry: pylint
+    args: ['pipeline']
+
+  - id: pytest
+    name: pytest
+    entry: pytest
+    args: ['pipeline']
