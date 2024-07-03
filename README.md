@@ -68,4 +68,43 @@ Observability is key. Save every request and response made to the APIs to a **pr
 ---
 
 ## How to run
-Please fill this section as part of the assignment.
+![Beaver](https://media.istockphoto.com/id/92911769/photo/beaver-with-stick.jpg?s=612x612&w=0&k=20&c=WP8QX6Xh1Yb5lyAvvvtU63tqE7V91dCaFvO_7RYzfhw=)
+
+### Requirements
+- Python 3.9^
+- Docker
+- Make
+
+### Startup
+
+```bash
+cp ./.env.example ./.env
+```
+
+```bash
+make setup
+```
+
+```bash
+make start
+```
+
+#### AirFlow
+
+Go to http://localhost:8080
+
+username: airflow
+password: airflow
+
+#### MLFlow
+
+Go to http://localhost:5000
+
+### Improvements
+
+- Typing
+- Building the AirFlow image with dependencies
+- Pipeline Testing
+- Tracking of training data
+- linter configuration to avoid putting so many disables around the code
+- moving constants in different files to a service configuration file
