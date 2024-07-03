@@ -1,8 +1,17 @@
 setup:
 	pre-commit install
 
+freeze:
+	pip freeze > requirements.txt
+
 lint:
-	pylint src
+	pylint pipeline
 
 test:
-	pytest src
+	pytest pipeline/dags/modules
+
+start:
+	docker-compose up
+
+stop:
+	docker-compose down
