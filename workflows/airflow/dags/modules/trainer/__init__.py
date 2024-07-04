@@ -1,6 +1,6 @@
 import pickle
 import mlflow
-import mlflow.sklearn
+from mlflow.models import infer_signature
 import xgboost
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score, mean_absolute_error
@@ -45,11 +45,18 @@ def evaluate_model(model, x_test, y_test):
     mlflow.set_experiment(MLFLOW_EXPERIMENT_NAME)
 
     with mlflow.start_run():
-        mlflow.sklearn.log_model(model, model_name)
+        model_signature = infer_signature(x_test, pred)
+
+        mlflow.sklearn.log_model(
+            sk_model=model,
+            artifact_path="sklearn-model",
+            signature=model_signature,
+            registered_model_name=f"sklearn-{model_name}"
+        )
+
+        mlflow.log_params(model_params)
+
         mlflow.log_metric("r2_score", r2)
         mlflow.log_metric("mean_absolute_error", mae)
-
-        for param_key, param_value in model_params.items():
-            mlflow.log_param(param_key, param_value)
 
     return r2, mae
