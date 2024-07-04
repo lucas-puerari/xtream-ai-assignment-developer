@@ -4,9 +4,9 @@ hooks:
   - id: pylint
     name: pylint
     entry: pylint
-    args: ['pipeline']
+    args: ['workflows/airflow/dags']
 
   - id: pytest
     name: pytest
     entry: pytest
-    args: ['pipeline']
+    args: ['workflows/airflow/dags/modules']
