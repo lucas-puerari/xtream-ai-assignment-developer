@@ -1,3 +1,6 @@
+setup:
+	pre-commit install
+
 freeze:
 	pip freeze > requirements.txt
 
