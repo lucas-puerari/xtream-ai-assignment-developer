@@ -4,12 +4,6 @@ setup:
 freeze:
 	pip freeze > requirements.txt
 
-lint:
-	pylint pipeline
-
-test:
-	pytest pipeline/dags/modules
-
 start:
 	docker-compose up
 
