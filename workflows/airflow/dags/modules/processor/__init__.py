@@ -29,7 +29,12 @@ def pre_data_preparation(csv_string):
 def linear_data_preparation(diamonds):
     df_diamonds = pd.DataFrame(diamonds[1:], columns=diamonds[0])
 
-    df_diamonds = pd.get_dummies(df_diamonds, columns=['cut', 'color', 'clarity'], drop_first=True)
+    df_diamonds = pd.get_dummies(
+        df_diamonds,
+        columns=['cut', 'color', 'clarity'],
+        drop_first=True,
+        dtype=np.float32
+    )
 
     return [df_diamonds.columns.tolist()] + df_diamonds.values.tolist()
 
