@@ -1,0 +1,11 @@
+repos:
+- repo: local
+  hooks:
+    - id: pylint
+      name: pylint
+      entry: bash -c 'source workflows/.venv/bin/activate && pylint --rcfile=workflows/pylintrc workflows/airflow/dags'
+      language: system
+    - id: pytest
+      name: pytest
+      entry: bash -c 'source workflows/.venv/bin/activate && pytest workflows/airflow/dags/modules'
+      language: system
