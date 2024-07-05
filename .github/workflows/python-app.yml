@@ -9,7 +9,8 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.9", "3.10", "3.11", "3.12"]
-        service: ["workflows", "webserver"]
+        # service: ["workflows", "webserver"] there are currently no webserver tests
+        service: ["workflows"]
 
     steps:
     - uses: actions/checkout@v4
