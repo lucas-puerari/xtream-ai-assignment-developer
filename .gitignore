@@ -168,8 +168,9 @@ cython_debug/
 /.idea/xtream-ai-assignment-developer.iml
 
 .vscode
+.DS_Store
 
-pipeline/artifacts
-pipeline/logs
+workflows/airflow/artifacts
+workflows/airflow/logs
 
 mlruns

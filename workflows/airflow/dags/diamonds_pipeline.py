@@ -2,6 +2,8 @@ from datetime import datetime
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 
+# pylint: disable=wrong-import-order
+
 from modules.callables.common import download_data_callable, pre_data_preparation_callable
 from modules.callables.linear import linear_data_preparation_callable,\
     post_linear_data_preparation_callable, train_linear_model_callable,\
