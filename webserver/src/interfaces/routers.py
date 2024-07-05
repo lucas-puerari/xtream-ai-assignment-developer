@@ -31,19 +31,19 @@ async def estimate_price(diamond: Diamond = Depends(get_diamond_params)):
             diamond.carat, diamond.cut, diamond.color, diamond.clarity, diamond.x
         )
         return {"price_estimate": price_estimate}
-    except ValueError as ve:
-        raise HTTPException(status_code=400, detail=str(ve))
+    except ValueError as err:
+        raise HTTPException(status_code=400, detail=str(err))
 
 
 @router.get("/diamond/find-similar/")
 async def find_similar_diamonds(
     diamond: Diamond = Depends(get_diamond_params),
     n: int = Query(3, gt=0)
-):    
+):
     try:
         similar_diamonds = diamond_service.find_similar_diamonds(
             diamond.carat, diamond.cut, diamond.color, diamond.clarity, diamond.x, n
         )
         return {"similar_diamonds": similar_diamonds}
-    except ValueError as ve:
-        raise HTTPException(status_code=400, detail=str(ve))
+    except ValueError as err:
+        raise HTTPException(status_code=400, detail=str(err))

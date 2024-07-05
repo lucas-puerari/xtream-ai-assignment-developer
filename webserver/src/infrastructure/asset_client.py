@@ -17,12 +17,12 @@ class AssetClient:
             (self.asset_data['color'] == diamond.color) &
             (self.asset_data['clarity'] == diamond.clarity)
         ]
-        
+
         filtered_diamonds['carat_diff'] = (filtered_diamonds['carat'] - diamond.carat).abs()
         filtered_diamonds = filtered_diamonds.sort_values(by='carat_diff')
 
         top_n_diamonds_dicts = filtered_diamonds.head(n).to_dict(orient='records')
 
         top_n_diamonds = [Diamond.from_dict(diamond) for diamond in top_n_diamonds_dicts]
-        
+
         return top_n_diamonds

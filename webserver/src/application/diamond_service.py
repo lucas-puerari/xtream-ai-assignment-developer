@@ -7,7 +7,7 @@ class DiamondService:
     def __init__(self, mlflow_client: MLflowClient, asset_client: AssetClient):
         self.mlflow_client = mlflow_client
         self.asset_client = asset_client
-        
+
     def estimate_price(self, carat: float, cut: str, color: str, clarity: str, x: float):
         diamond = Diamond(
             carat=carat,
@@ -20,8 +20,16 @@ class DiamondService:
         price_estimate = self.mlflow_client.predict_price(diamond)
 
         return price_estimate
-    
-    def find_similar_diamonds(self, carat: float, cut: str, color: str, clarity: str, x: float, n: int = 3):
+
+    def find_similar_diamonds(
+            self,
+            carat: float,
+            cut: str,
+            color: str,
+            clarity: str,
+            x: float,
+            n: int = 3
+        ):
         diamond = Diamond(
             carat=carat,
             cut=cut,
@@ -31,5 +39,5 @@ class DiamondService:
         )
 
         similar_diamonds = self.asset_client.find_similar_diamonds(diamond, n)
-        
+
         return similar_diamonds

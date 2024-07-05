@@ -10,13 +10,13 @@ class MLflowClient:
     def predict_price(self, diamond: Diamond):
         model = mlflow.pyfunc.load_model(self.model_uri)
         features = diamond.to_feature_array()
-        # This prediction has some problems. 
+        # This prediction has some problems.
         # It returns wrong values. Possible causes:
         # - mismatch between the versions of the dependencies
         #   used between the workflow and the webserver
         # - model serialization while saving it to mlflow
-        # - Feature preprocessing that does not match between 
-        #   workflow and webserver. 
+        # - Feature preprocessing that does not match between
+        #   workflow and webserver.
         #   (tip: maybe it is better to have shared preprocessing functions)
         price_prediction = model.predict(features)
         return float(price_prediction[0])

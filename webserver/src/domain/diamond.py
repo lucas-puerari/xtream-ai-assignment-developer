@@ -1,15 +1,15 @@
 from enum import Enum
-from pydantic import BaseModel, Field, validator
 from typing import ClassVar, List
+from pydantic import BaseModel, Field, field_validator
 import numpy as np
 
 
 class CutEnum(str, Enum):
-    Fair = "Fair"
-    Good = "Good"
-    VeryGood = "Very Good"
-    Ideal = "Ideal"
-    Premium = "Premium"
+    FAIR = "Fair"
+    GOOD = "Good"
+    VERY_GOOD = "Very Good"
+    IDEAL = "Ideal"
+    PREMIUM = "Premium"
 
 class ColorEnum(str, Enum):
     D = "D"
@@ -32,19 +32,24 @@ class ClarityEnum(str, Enum):
 
 
 class Diamond(BaseModel):
-    carat: float = Field(..., gt=0, description="Carat weight of the diamond, must be greater than 0")
+    carat: float = Field(
+        ...,
+        gt=0,
+        description="Carat weight of the diamond, must be greater than 0"
+    )
     cut: CutEnum = Field(..., description="Cut quality of the diamond")
     color: ColorEnum = Field(..., description="Color grade of the diamond")
     clarity: ClarityEnum = Field(..., description="Clarity grade of the diamond")
     x: float = Field(..., gt=0, description="Dimension x of the diamond, must be greater than 0")
-    
+
     CUT_MAPPING: ClassVar[dict] = {
-        CutEnum.Fair: 0,
-        CutEnum.Good: 1,
-        CutEnum.VeryGood: 2,
-        CutEnum.Ideal: 3,
-        CutEnum.Premium: 4,
+        CutEnum.FAIR: 0,
+        CutEnum.GOOD: 1,
+        CutEnum.VERY_GOOD: 2,
+        CutEnum.IDEAL: 3,
+        CutEnum.PREMIUM: 4,
     }
+
     COLOR_MAPPING: ClassVar[dict] = {
         ColorEnum.D: 0,
         ColorEnum.E: 1,
@@ -54,6 +59,7 @@ class Diamond(BaseModel):
         ColorEnum.I: 5,
         ColorEnum.J: 6
     }
+
     CLARITY_MAPPING: ClassVar[dict] = {
         ClarityEnum.IF: 0,
         ClarityEnum.VVS1: 1,
@@ -65,24 +71,27 @@ class Diamond(BaseModel):
         ClarityEnum.I1: 7
     }
 
-    @validator('cut')
+    # pylint: disable=no-self-argument
+    @field_validator('cut')
     def validate_cut(cls, value):
         if value not in cls.CUT_MAPPING:
             raise ValueError('Invalid cut value')
         return value
 
-    @validator('color')
+    # pylint: disable=no-self-argument
+    @field_validator('color')
     def validate_color(cls, value):
         if value not in cls.COLOR_MAPPING:
             raise ValueError('Invalid color value')
         return value
 
-    @validator('clarity')
+    # pylint: disable=no-self-argument
+    @field_validator('clarity')
     def validate_clarity(cls, value):
         if value not in cls.CLARITY_MAPPING:
             raise ValueError('Invalid clarity value')
         return value
-    
+
     @classmethod
     def from_dict(cls, data: dict):
         return cls(**data)
