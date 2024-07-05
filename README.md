@@ -100,11 +100,18 @@ password: airflow
 
 Go to http://localhost:5000
 
+#### Diamonds Webserver
+
+Go to http://localhost:8000
+
 ### Improvements
 
 - Typing
 - Building the AirFlow image with dependencies
-- Pipeline Testing
+- Tests
+  - Pipeline
+  - Webserver
 - Tracking of training data
-- linter configuration to avoid putting so many disables around the code
-- moving constants in different files to a service configuration file
+- Linter configuration to reduce the need for disabling checks throughout the code
+- Moving constants from various files to a centralized service configuration file
+- Sharing functions that manipulate data between the workflow and webserver
