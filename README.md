@@ -115,3 +115,4 @@ Go to http://localhost:8000
 - Linter configuration to reduce the need for disabling checks throughout the code
 - Moving constants from various files to a centralized service configuration file
 - Sharing functions that manipulate data between the workflow and webserver
+- Understand how to set up a single pre-commit
