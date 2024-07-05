@@ -45,12 +45,18 @@ def evaluate_model(model, x_test, y_test):
     mlflow.set_experiment(MLFLOW_EXPERIMENT_NAME)
 
     with mlflow.start_run():
-        model_signature = infer_signature(x_test, pred)
+        # I'm not able to fix the following error
+        # mlflow.exceptions.MlflowException: Failed to enforce schema of data
+        # '[[ 32.   3.   0.   0. 345.]]' with schema '[Array(double) (required)]'.
+        # Error: Expected data to be list or numpy array, got float.
+        # Temporarily disable the template signature
+
+        # model_signature = infer_signature(x_test, pred)
 
         mlflow.sklearn.log_model(
             sk_model=model,
             artifact_path="sklearn-model",
-            signature=model_signature,
+            # signature=model_signature,
             registered_model_name=f"sklearn-{model_name}"
         )
 
