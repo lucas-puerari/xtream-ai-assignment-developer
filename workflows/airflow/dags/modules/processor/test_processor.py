@@ -26,7 +26,7 @@ def test_linear_data_preparation():
         [0.7, 'Fair', 'J', 'SI1', 5.5, 3000],
         [1.2, 'Very Good', 'I', 'VS2', 6.75, 5200]
     ]
-    
+
     result = linear_data_preparation(mock_data)
 
     assert isinstance(result, list)
