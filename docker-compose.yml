@@ -216,9 +216,20 @@ services:
       /bin/bash -c "pip install psycopg2-binary && mlflow server --backend-store-uri $${MLFLOW_TRACKING_URI} --default-artifact-root $${MLFLOW_DEFAULT_ARTIFACT_ROOT} --host 0.0.0.0"
     volumes:
       - ${AIRFLOW_PROJ_DIR:-.}/artifacts:/mlflow/artifacts
+    restart: always
     depends_on:
       mlflow-postgres:
         condition: service_healthy
+
+  diamonds-webserver:
+    image: diamonds-webserver:0.1.0
+    ports:
+      - "8000:8000"
+    environment:
+      MLFLOW_TRACKING_URI: http://mlflow:5000
+    volumes:
+      - ${AIRFLOW_PROJ_DIR:-.}/artifacts:/mlflow/artifacts
+    restart: always
 
 volumes:
   airflow-postgres-volume:
